@@ -31,6 +31,10 @@ public class SqlEdge extends SqlElement implements Edge {
   public Node to() {
     return null;
   }
+  
+  public static Builder builder (Graph aGraph) {
+    return new Builder (aGraph);
+  }
 
   static class Builder {
 

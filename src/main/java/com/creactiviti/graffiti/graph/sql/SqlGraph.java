@@ -41,12 +41,28 @@ public class SqlGraph implements Graph {
 
   @Override
   public Edge add(Edge aEdge) {
-    return null;
+    String id = generateId();
+    
+    String propertiesAsString = JSON.write(aEdge.properties());
+    
+    String sql = "insert into edge (id,edge_type,properties,from_node_id,to_node_id) values (?,?,?::jsonb,?,?)";
+    
+    jdbc.update(sql,id,aEdge.type(),propertiesAsString,aEdge.from().id(),aEdge.to().id());
+    
+    return SqlEdge.builder(this)
+                  .id(id)
+                  .type(aEdge.type())
+                  .properties(aEdge.properties())
+                  .createdAt(aEdge.createtAt())
+                  .modifiedAt(aEdge.modifiedAt())
+                  .fromNodeId(aEdge.from().id())
+                  .toNodeId(aEdge.to().id())
+                  .build();
   }
 
   @Override
   public Traversal<Node> nodes() {
-    return null;
+    return new SqlGraphTraversal<>(this);
   }
 
   @Override

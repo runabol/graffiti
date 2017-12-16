@@ -17,12 +17,17 @@ public class SqlGraphTraversal<E extends Element> implements Traversal<E> {
   }
 
   @Override
-  public E next() {
+  public E next () {
     return null;
   }
 
   @Override
   public Traversal<E> has(String aProperty, Object aValue) {
+    return null;
+  }
+
+  @Override
+  public Traversal<E> hasId(String aId) {
     return null;
   }
 
