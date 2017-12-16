@@ -1,9 +1,14 @@
 package com.creactiviti.graffiti.graph.sql;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import javax.sql.DataSource;
 
+import org.postgresql.util.PGobject;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.creactiviti.graffiti.graph.Edge;
@@ -30,13 +35,15 @@ public class SqlGraph implements Graph {
     
     jdbc.update(sql,id,aNode.type(),propertiesAsString);
     
-    return SqlNode.builder(this)
-                  .id(id)
-                  .type(aNode.type())
-                  .properties(aNode.properties())
-                  .createdAt(aNode.createtAt())
-                  .modifiedAt(aNode.modifiedAt())
-                  .build();
+    return nodes().hasId(id).next();
+    
+//    return SqlNode.builder(this)
+//                  .id(id)
+//                  .type(aNode.type())
+//                  .properties(aNode.properties())
+//                  .createdAt(aNode.createtAt())
+//                  .modifiedAt(aNode.modifiedAt())
+//                  .build();
   }
 
   @Override
@@ -58,6 +65,29 @@ public class SqlGraph implements Graph {
                   .fromNodeId(aEdge.from().id())
                   .toNodeId(aEdge.to().id())
                   .build();
+  }
+  
+  Iterator<Node> nodes (List<SelectClause> aWhere, List<Object> aArgs) {
+    SelectBuilder sbuilder = new SelectBuilder("node");
+    for(SelectClause where : aWhere) {
+      where.apply(sbuilder);
+    }
+    return jdbc.queryForList(sbuilder.build(), aArgs.toArray())
+               .stream()
+               .map(r-> {
+                 String id = (String) r.get("id");
+                 String type = (String) r.get("node_type");
+                 PGobject properties = (PGobject) r.get("properties");
+                 String propertiesValue = properties.getValue();
+                 
+                 return SqlNode.builder(this)
+                               .id(id)
+                               .type(type)
+                               .properties(JSON.read(propertiesValue, Map.class))
+                               .build(); 
+               })
+               .collect(Collectors.toList())
+               .iterator();  // FIXME: lazy loaded
   }
 
   @Override
