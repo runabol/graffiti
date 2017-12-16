@@ -73,9 +73,9 @@ public class SomeClass {
   
     // building a Movie node instance
     Node node = SqlNode.builder(g)
-                        .type("Movie")
-      	                .property("title", "Home Alone")
-      	                .build();
+                       .type("Movie")
+      	               .property("title", "Home Alone")
+      	               .build();
       	                
     // adding the movie to the Graph
     Node added = g.add(node);
