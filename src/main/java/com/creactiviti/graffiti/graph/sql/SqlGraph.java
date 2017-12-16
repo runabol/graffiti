@@ -58,15 +58,19 @@ public class SqlGraph implements Graph {
     
     jdbc.update(sql,id,aEdge.type(),propertiesAsString,aEdge.from().id(),aEdge.to().id());
     
-    return SimpleEdge.builder(this)
-                  .id(id)
-                  .type(aEdge.type())
-                  .properties(aEdge.properties())
-                  .createdAt(aEdge.createtAt())
-                  .modifiedAt(aEdge.modifiedAt())
-                  .fromNodeId(aEdge.from().id())
-                  .toNodeId(aEdge.to().id())
-                  .build();
+    return edges().hasId(aEdge.id()).next();
+  }
+  
+  Iterator<Edge> edges (List<SelectClause> aWhere, List<Object> aArgs) {
+    SelectBuilder sbuilder = new SelectBuilder("edge");
+    for(SelectClause where : aWhere) {
+      where.apply(sbuilder);
+    }
+    return jdbc.queryForList(sbuilder.build(), aArgs.toArray())
+               .stream()
+               .map(this::toEdge)
+               .collect(Collectors.toList())
+               .iterator();  // FIXME: lazy loaded
   }
   
   Iterator<Node> nodes (List<SelectClause> aWhere, List<Object> aArgs) {
@@ -76,20 +80,37 @@ public class SqlGraph implements Graph {
     }
     return jdbc.queryForList(sbuilder.build(), aArgs.toArray())
                .stream()
-               .map(r-> {
-                 String id = (String) r.get("id");
-                 String type = (String) r.get("node_type");
-                 PGobject properties = (PGobject) r.get("properties");
-                 String propertiesValue = properties.getValue();
-                 
-                 return SimpleNode.builder(this)
-                               .id(id)
-                               .type(type)
-                               .properties(JSON.read(propertiesValue, Map.class))
-                               .build(); 
-               })
+               .map(this::toNode)
                .collect(Collectors.toList())
                .iterator();  // FIXME: lazy loaded
+  }
+  
+  private Edge toEdge (Map<String, Object> aRecord) {
+    String id = (String) aRecord.get("id");
+    String type = (String) aRecord.get("node_type");
+    String fromNodeId = (String) aRecord.get("from_node_id");
+    String toNodeId = (String) aRecord.get("to_node_id");
+    PGobject properties = (PGobject) aRecord.get("properties");
+    String propertiesValue = properties.getValue();
+    return SimpleEdge.builder(this)
+                     .id(id)
+                     .type(type)
+                     .properties(JSON.read(propertiesValue, Map.class))
+                     .fromNodeId(fromNodeId)
+                     .toNodeId(toNodeId)
+                     .build(); 
+  }
+  
+  private Node toNode (Map<String, Object> aRecord) {
+    String id = (String) aRecord.get("id");
+    String type = (String) aRecord.get("node_type");
+    PGobject properties = (PGobject) aRecord.get("properties");
+    String propertiesValue = properties.getValue();
+    return SimpleNode.builder(this)
+                     .id(id)
+                     .type(type)
+                     .properties(JSON.read(propertiesValue, Map.class))
+                     .build(); 
   }
 
   @Override

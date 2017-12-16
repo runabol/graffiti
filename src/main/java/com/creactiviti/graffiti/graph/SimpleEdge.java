@@ -11,6 +11,8 @@ public class SimpleEdge extends SimpleElement implements Edge {
   private final Graph g;
   private final String fromNodeId; 
   private final String toNodeId;
+  private Node from = null;
+  private Node to = null;
 
   public SimpleEdge(Graph aGraph, String aId, String aType, Date aCreatedAt, Date aModifiedAt, Map<String, Object> aProperties, String aFromNodeId, String aToNodeId) {
     super(aId, aType, aCreatedAt, aModifiedAt, aProperties);
@@ -21,12 +23,18 @@ public class SimpleEdge extends SimpleElement implements Edge {
 
   @Override
   public Node from() {
-    return null;
+    if(from != null) {
+      return from;
+    }
+    return from = g.nodes().hasId(fromNodeId).next();
   }
 
   @Override
   public Node to() {
-    return null;
+    if(to != null) {
+      return to;
+    }
+    return to = g.nodes().hasId(toNodeId).next();
   }
   
   public static Builder builder (Graph aGraph) {
