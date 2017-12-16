@@ -12,7 +12,7 @@ public interface Node extends Element {
   
   Iterator<Edge> from (String aEdgeType);
   
-  default NodeBuilder builder (Graph aGraph) {
+  static NodeBuilder builder (Graph aGraph) {
     return new NodeBuilder(aGraph);
   }
   

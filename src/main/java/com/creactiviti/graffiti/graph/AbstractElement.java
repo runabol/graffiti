@@ -1,5 +1,6 @@
 package com.creactiviti.graffiti.graph;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
@@ -46,6 +47,11 @@ public abstract class AbstractElement implements Element {
   @Override
   public <T> T property (String aName) {
     return (T) properties.get(aName);
+  }
+  
+  @Override
+  public Map<String, Object> properties() {
+    return Collections.unmodifiableMap(properties);
   }
 
 }

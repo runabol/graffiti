@@ -1,6 +1,7 @@
 package com.creactiviti.graffiti.graph;
 
 import java.util.Date;
+import java.util.Map;
 
 /**
  * The base interface for all elements 
@@ -54,5 +55,12 @@ public interface Element {
    *           property name.  
    */
   <T> T property (String aName);
+  
+  /**
+   * Return all properties of the node.
+   * 
+   * @return Map<String,Object>
+   */
+  Map<String, Object> properties ();
   
 }
