@@ -2,7 +2,6 @@ package com.creactiviti.graffiti.graph;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.creactiviti.graffiti.utils.Assert;
@@ -17,13 +16,13 @@ public class SimpleNode extends SimpleElement implements Node {
   }
 
   @Override
-  public Iterator<Edge> to (String aEdgeType) {
-    return g.edges().hasType(aEdgeType).toNodeId(id());
+  public Traversal<Edge> from (String aEdgeType) {
+    return g.edges().toNodeId(id()).hasType(aEdgeType);
   }
-
+  
   @Override
-  public Iterator<Edge> from (String aEdgeType) {
-    return g.edges().hasType(aEdgeType).fromNodeId(id());
+  public Traversal<Edge> to (String aEdgeType) {
+    return g.edges().fromNodeId(id()).hasType(aEdgeType);
   }
   
   public static Builder builder (Graph aGraph) {

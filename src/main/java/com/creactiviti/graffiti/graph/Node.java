@@ -1,16 +1,13 @@
 package com.creactiviti.graffiti.graph;
 
-import java.util.Iterator;
-
 /**
  * @author Arik Cohen
  * @since Dec 16, 2017
  */
 public interface Node extends Element {
 
-  Iterator<Edge> to (String aEdgeType);
+  Traversal<Edge> from (String aEdgeType);
   
-  Iterator<Edge> from (String aEdgeType);
-  
+  Traversal<Edge> to (String aEdgeType);
   
 }

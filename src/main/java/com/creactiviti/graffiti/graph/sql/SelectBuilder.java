@@ -32,9 +32,12 @@ public class SelectBuilder {
     if(where.size() > 0) {
       sbuilder.append("WHERE");
       
-      for(String clause : where) {
+      for(int i=0; i<where.size(); i++) {
+        if(i > 0) {
+          sbuilder.append(" AND ");
+        }
         sbuilder.append(" ")
-                .append(clause)
+                .append(where.get(i))
                 .append(" ");
       }
     }

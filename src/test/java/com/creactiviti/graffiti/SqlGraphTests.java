@@ -53,6 +53,8 @@ public class SqlGraphTests {
     Assert.assertEquals(movie.id(), directed.to().id());
     Assert.assertEquals(director.id(), directed.from().id());
     
+    director.to("directed").next().to();
+    
 	}
 	
 
