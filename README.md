@@ -65,7 +65,7 @@ mvn clean spring-boot:run -Dspring.datasource.initialize=true -Dspring.datasourc
 
 ```
 @Component
-public class SomeClass {
+public class SomeComponent {
   
   @Autowired private Graph g;
 
@@ -88,6 +88,14 @@ public class SomeClass {
                         
     // adding the director to the graph.
     director = g.add(director);
+    
+    // creating a "directed" link between the director
+    // and the movie
+    Edge directed = SimpleEdge.builder(g)
+                              .fromNodeId(director.id())
+                              .type("directed")
+                              .toNodeId(movie.id())
+                              .build();
     
   }
 
