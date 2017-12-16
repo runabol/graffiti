@@ -21,20 +21,22 @@ public class SqlGraph implements Graph {
   }
 
   @Override
-  public Node add(Node aNode) {
+  public Node add (Node aNode) {
     String id = generateId();
     
     String propertiesAsString = JSON.write(aNode.properties());
     
-    jdbc.update("insert into node (id,node_type,properties) values (?,?,?::jsonb)",id,aNode.type(),propertiesAsString);
+    String sql = "insert into node (id,node_type,properties) values (?,?,?::jsonb)";
     
-    return Node.builder(this)
-               .id(id)
-               .type(aNode.type())
-               .properties(aNode.properties())
-               .createdAt(aNode.createtAt())
-               .modifiedAt(aNode.modifiedAt())
-               .build();
+    jdbc.update(sql,id,aNode.type(),propertiesAsString);
+    
+    return SqlNode.builder(this)
+                  .id(id)
+                  .type(aNode.type())
+                  .properties(aNode.properties())
+                  .createdAt(aNode.createtAt())
+                  .modifiedAt(aNode.modifiedAt())
+                  .build();
   }
 
   @Override

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.creactiviti.graffiti.graph.Node;
 import com.creactiviti.graffiti.graph.sql.SqlGraph;
+import com.creactiviti.graffiti.graph.sql.SqlNode;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -17,7 +17,7 @@ public class SqlGraphTests {
 
 	@Test
 	public void testAdd1() {
-	  g.add(Node.builder(g).type("Dog").build());
+	  g.add(SqlNode.builder(g).type("Movie").property("title", "Home Alone").build());
 	}
 
 }

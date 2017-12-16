@@ -12,8 +12,5 @@ public interface Node extends Element {
   
   Iterator<Edge> from (String aEdgeType);
   
-  static NodeBuilder builder (Graph aGraph) {
-    return new NodeBuilder(aGraph);
-  }
   
 }

@@ -1,14 +1,16 @@
-package com.creactiviti.graffiti.graph;
+package com.creactiviti.graffiti.graph.sql;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
+import com.creactiviti.graffiti.graph.Element;
+
 /**
  * @author Arik Cohen
  * @since Dec 16, 2017
  */
-public abstract class AbstractElement implements Element {
+public abstract class SqlElement implements Element {
 
   private final String id; 
   private final Date createdAt;
@@ -16,7 +18,7 @@ public abstract class AbstractElement implements Element {
   private final String type;
   private final Map<String, Object> properties;
   
-  public AbstractElement(String aId, String aType, Date aCreatedAt, Date aModifiedAt, Map<String, Object> aProperties) {
+  public SqlElement(String aId, String aType, Date aCreatedAt, Date aModifiedAt, Map<String, Object> aProperties) {
     id = aId;
     createdAt = aCreatedAt;
     modifiedAt = aModifiedAt;
