@@ -14,6 +14,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import com.creactiviti.graffiti.graph.Edge;
 import com.creactiviti.graffiti.graph.Graph;
 import com.creactiviti.graffiti.graph.Node;
+import com.creactiviti.graffiti.graph.SimpleEdge;
+import com.creactiviti.graffiti.graph.SimpleNode;
 import com.creactiviti.graffiti.graph.Traversal;
 import com.creactiviti.graffiti.utils.JSON;
 
@@ -56,7 +58,7 @@ public class SqlGraph implements Graph {
     
     jdbc.update(sql,id,aEdge.type(),propertiesAsString,aEdge.from().id(),aEdge.to().id());
     
-    return SqlEdge.builder(this)
+    return SimpleEdge.builder(this)
                   .id(id)
                   .type(aEdge.type())
                   .properties(aEdge.properties())
@@ -80,7 +82,7 @@ public class SqlGraph implements Graph {
                  PGobject properties = (PGobject) r.get("properties");
                  String propertiesValue = properties.getValue();
                  
-                 return SqlNode.builder(this)
+                 return SimpleNode.builder(this)
                                .id(id)
                                .type(type)
                                .properties(JSON.read(propertiesValue, Map.class))

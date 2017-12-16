@@ -1,38 +1,38 @@
-package com.creactiviti.graffiti.graph.sql;
+package com.creactiviti.graffiti.graph;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import com.creactiviti.graffiti.graph.Edge;
-import com.creactiviti.graffiti.graph.Graph;
-import com.creactiviti.graffiti.graph.Node;
 import com.creactiviti.graffiti.utils.Assert;
 
-public class SqlNode extends SqlElement implements Node {
+public class SimpleEdge extends SimpleElement implements Edge {
   
   private final Graph g;
+  private final String fromNodeId; 
+  private final String toNodeId;
 
-  public SqlNode(Graph aGraph, String aId, String aType, Date aCreatedAt, Date aModifiedAt, Map<String, Object> aProperties) {
+  public SimpleEdge(Graph aGraph, String aId, String aType, Date aCreatedAt, Date aModifiedAt, Map<String, Object> aProperties, String aFromNodeId, String aToNodeId) {
     super(aId, aType, aCreatedAt, aModifiedAt, aProperties);
     g = aGraph;
+    fromNodeId = aFromNodeId;
+    toNodeId = aToNodeId;
   }
 
   @Override
-  public Iterator<Edge> to (String aEdgeType) {
+  public Node from() {
     return null;
   }
 
   @Override
-  public Iterator<Edge> from (String aEdgeType) {
+  public Node to() {
     return null;
   }
   
   public static Builder builder (Graph aGraph) {
-    return new Builder(aGraph);
+    return new Builder (aGraph);
   }
-  
+
   public static class Builder {
 
     private final Graph g;
@@ -41,6 +41,8 @@ public class SqlNode extends SqlElement implements Node {
     private Date createdAt;
     private Date modifiedAt;
     private Map<String, Object> properties = new HashMap<>();
+    private String fromNodeId;
+    private String toNodeId;
     
     Builder (Graph aGraph) {
       g = aGraph;
@@ -76,12 +78,23 @@ public class SqlNode extends SqlElement implements Node {
       return this;
     }
     
-    public Node build () {
+    public Builder fromNodeId (String aFromNodeId) {
+      fromNodeId = aFromNodeId;
+      return this;
+    }
+    
+    public Builder toNodeId (String aToNodeId) {
+      toNodeId = aToNodeId;
+      return this;
+    }
+    
+    public Edge build () {
       Assert.isTrue(type != null, "node type must not be null");
-      return new SqlNode(g,id, type,createdAt, modifiedAt, properties);
+      Assert.isTrue(fromNodeId != null, "from node id must not be null");
+      Assert.isTrue(toNodeId != null, "to node id must not be null");
+      return new SimpleEdge(g,id, type,createdAt, modifiedAt, properties,fromNodeId,toNodeId);
     }
     
   }
-
 
 }
