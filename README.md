@@ -12,11 +12,11 @@ A Graph is actually an extermely simple yet powerful data structure:
 
 ![alt text](graph.png "Graph")
 
-It is composed of only two units:
+It is composed of only two basic units:
 
 ### Node
 
-A Node is the basic unit of data. Another word for it could be Object or an Entity but we like Node better because this is how they like to call it in the Graph world.
+A Node (the round elements in the Graph above) is the basic unit of data. Another word for it could be Object or an Entity but we like Node better because this is how they like to call it in the Graph world.
 
 Nodes are grouped by a type which is just a simple String.
 
