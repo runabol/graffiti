@@ -29,3 +29,16 @@ An edge represents a link between two nodes. Again, this could be called a Link 
 ### That's it!
 
 And between these basic primitive data structures you can represent just about anything.
+
+
+# Getting Started
+
+## Installation
+
+If you have Docker and you want to spin one up easily run:
+
+```
+docker run --name postgres -e POSTGRES_DB=graffiti -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:9.6.5-alpine
+```
+
+
