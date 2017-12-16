@@ -87,7 +87,7 @@ public class SomeClass {
       	                .build();
       	                
     // adding the director to the graph.
-	director = g.add(director);
+    director = g.add(director);
     
   }
 
