@@ -60,3 +60,28 @@ docker run --name postgres -e POSTGRES_DB=graffiti -e POSTGRES_USER=postgres -e 
 ```
 mvn clean spring-boot:run -Dspring.datasource.initialize=true -Dspring.datasource.url=jdbc:postgresql://localhost:5432/graffiti -Dspring.datasource.username=postgres -Dspring.datasource.password=password
 ```
+
+## Usage 
+
+```
+@Component
+public class SomeClass {
+  
+  @Autowired private Graph g;
+
+  public void doStuff () {
+  
+    // building a Movie node instance
+    Node node = SqlNode.builder(g)
+                        .type("Movie")
+      	                .property("title", "Home Alone")
+      	                .build();
+      	                
+    // adding the movie to the Graph
+    Node added = g.add(node);
+    
+  }
+
+}
+
+```
