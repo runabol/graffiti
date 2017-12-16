@@ -4,11 +4,10 @@ Graffiti is a headless (no UI) Java CMS which is designed to be dead simple.
 
 # Weapons of Choice
 
-Java 1.8
-Spring Boot
-GraphQL-Java
-PostgreSQL
-
+1. Java 1.8
+2. Spring Boot
+3. GraphQL-Java
+4. PostgreSQL
 
 # Concepts
 
@@ -59,5 +58,5 @@ docker run --name postgres -e POSTGRES_DB=graffiti -e POSTGRES_USER=postgres -e 
 2. Initialize the database:
 
 ```
-mvn clean spring-boot:run -Dspring.datasource.initialize=true
+mvn clean spring-boot:run -Dspring.datasource.initialize=true -Dspring.datasource.url=jdbc:postgresql://localhost:5432/graffiti -Dspring.datasource.username=postgres -Dspring.datasource.password=password
 ```
