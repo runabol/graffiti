@@ -4,11 +4,15 @@ Graffiti is a headless (no UI) Java CMS which is designed to be dead simple.
 
 # Concepts
 
-Graffiti relies on two core data structures: 
+Graffiti relies only a handful of core data structures: 
 
 ## Graph
 
-A Graph is actually an extermely simple yet powerful data structure. It is composed of only two units:
+A Graph is actually an extermely simple yet powerful data structure:
+
+![alt text](graph.png "Graph")
+
+It is composed of only two units:
 
 ### Node
 
