@@ -72,13 +72,22 @@ public class SomeClass {
   public void doStuff () {
   
     // building a Movie node instance
-    Node node = SqlNode.builder(g)
-                       .type("Movie")
-      	               .property("title", "Home Alone")
-      	               .build();
+    Node movie = SqlNode.builder(g)
+                        .type("Movie")
+      	                .property("title", "Terminator")
+      	                .build();
       	                
     // adding the movie to the Graph
-    Node added = g.add(node);
+    movie = g.add(movie);
+    
+    // building a director node instance
+    Node director = SqlNode.builder(g)
+                        .type("Director")
+      	                .property("name", "James Cameron")
+      	                .build();
+      	                
+    // adding the director to the graph.
+	director = g.add(director);
     
   }
 
