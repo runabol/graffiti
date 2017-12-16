@@ -18,12 +18,12 @@ public class SimpleNode extends SimpleElement implements Node {
 
   @Override
   public Iterator<Edge> to (String aEdgeType) {
-    return null;
+    return g.edges().hasType(aEdgeType).toNodeId(id());
   }
 
   @Override
   public Iterator<Edge> from (String aEdgeType) {
-    return null;
+    return g.edges().hasType(aEdgeType).fromNodeId(id());
   }
   
   public static Builder builder (Graph aGraph) {

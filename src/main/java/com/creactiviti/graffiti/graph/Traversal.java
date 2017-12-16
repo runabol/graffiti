@@ -14,4 +14,8 @@ public interface Traversal<E extends Element> extends Iterator<E> {
   
   Traversal<E> hasType (String aType);
   
+  Traversal<E> fromNodeId (String aFromNodeId);
+  
+  Traversal<E> toNodeId (String aToNodeId);
+  
 }

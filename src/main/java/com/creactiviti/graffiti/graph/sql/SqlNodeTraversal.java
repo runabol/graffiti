@@ -28,4 +28,14 @@ public class SqlNodeTraversal extends SqlGraphTraversal<Node> {
     return (iterator = graph.nodes(where, arguments));
   }
 
+  @Override
+  public Traversal<Node> fromNodeId(String aFromNodeId) {
+    throw new UnsupportedOperationException();
+  }
+
+  @Override
+  public Traversal<Node> toNodeId(String aFromNodeId) {
+    throw new UnsupportedOperationException();
+  }
+
 }

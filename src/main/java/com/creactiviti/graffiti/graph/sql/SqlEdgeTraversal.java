@@ -28,4 +28,18 @@ public class SqlEdgeTraversal extends SqlGraphTraversal<Edge> {
     return (iterator = graph.edges(where, arguments));
   }
 
+  @Override
+  public Traversal<Edge> fromNodeId(String aFromNodeId) {
+    where.add(new FromNodeIdEq());
+    arguments.add(aFromNodeId);
+    return this;
+  }
+
+  @Override
+  public Traversal<Edge> toNodeId(String aToNodeId) {
+    where.add(new ToNodeIdEq());
+    arguments.add(aToNodeId);
+    return this;
+  }
+
 }
