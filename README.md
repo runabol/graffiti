@@ -58,4 +58,6 @@ docker run --name postgres -e POSTGRES_DB=graffiti -e POSTGRES_USER=postgres -e 
 
 2. Initialize the database:
 
+```
 mvn clean spring-boot:run -Dspring.datasource.initialize=true
+```
