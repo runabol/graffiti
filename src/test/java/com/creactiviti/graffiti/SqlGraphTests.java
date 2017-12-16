@@ -48,6 +48,8 @@ public class SqlGraphTests {
                               .toNodeId(movie.id())
                               .build();
     
+    directed = g.add(directed);
+    
     Assert.assertEquals(movie.id(), directed.to().id());
     Assert.assertEquals(director.id(), directed.from().id());
     

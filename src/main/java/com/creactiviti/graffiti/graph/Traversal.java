@@ -12,4 +12,6 @@ public interface Traversal<E extends Element> extends Iterator<E> {
   
   Traversal<E> has (String aProperty, Object aValue);
   
+  Traversal<E> hasType (String aType);
+  
 }

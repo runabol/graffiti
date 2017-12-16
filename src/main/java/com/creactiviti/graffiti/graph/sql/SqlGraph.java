@@ -58,7 +58,7 @@ public class SqlGraph implements Graph {
     
     jdbc.update(sql,id,aEdge.type(),propertiesAsString,aEdge.from().id(),aEdge.to().id());
     
-    return edges().hasId(aEdge.id()).next();
+    return edges().hasId(id).next();
   }
   
   Iterator<Edge> edges (List<SelectClause> aWhere, List<Object> aArgs) {
@@ -87,7 +87,7 @@ public class SqlGraph implements Graph {
   
   private Edge toEdge (Map<String, Object> aRecord) {
     String id = (String) aRecord.get("id");
-    String type = (String) aRecord.get("node_type");
+    String type = (String) aRecord.get("edge_type");
     String fromNodeId = (String) aRecord.get("from_node_id");
     String toNodeId = (String) aRecord.get("to_node_id");
     PGobject properties = (PGobject) aRecord.get("properties");
@@ -115,12 +115,12 @@ public class SqlGraph implements Graph {
 
   @Override
   public Traversal<Node> nodes() {
-    return new SqlGraphTraversal<>(this);
+    return new SqlNodeTraversal(this);
   }
 
   @Override
   public Traversal<Edge> edges() {
-    return null;
+    return new SqlEdgeTraversal(this);
   }
   
   private String generateId () {

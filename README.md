@@ -97,6 +97,8 @@ public class SomeComponent {
                               .toNodeId(movie.id())
                               .build();
     
+    directed = g.add(directed);
+    
   }
 
 }

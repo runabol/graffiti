@@ -7,23 +7,17 @@ import java.util.List;
 import com.creactiviti.graffiti.graph.Element;
 import com.creactiviti.graffiti.graph.Traversal;
 
-public class SqlGraphTraversal<E extends Element> implements Traversal<E> {
+public abstract class SqlGraphTraversal<E extends Element> implements Traversal<E> {
 
-  private final SqlGraph graph;
-  private final List<SelectClause> where = new ArrayList<>();
-  private final List<Object> arguments = new ArrayList<>();
-  private Iterator<E> iterator = null;
+  protected final SqlGraph graph;
+  protected final List<SelectClause> where = new ArrayList<>();
+  protected final List<Object> arguments = new ArrayList<>();
   
   public SqlGraphTraversal(SqlGraph aGraph) {
     graph  = aGraph;
   }
   
-  private Iterator<E> iterator () {
-    if(iterator != null) {
-      return iterator;
-    }
-    return (iterator = (Iterator<E>) graph.nodes(where, arguments));
-  }
+  protected abstract Iterator<E> iterator ();
   
   @Override
   public boolean hasNext() {
@@ -49,5 +43,6 @@ public class SqlGraphTraversal<E extends Element> implements Traversal<E> {
     arguments.add(aId);
     return this;
   }
+  
 
 }
