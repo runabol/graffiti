@@ -10,6 +10,8 @@ Traditionally, CMS products such as Wordpress, Drupal and the like were heavily 
 
 What you really need is a platform-agnostic data exchange format which can be consumed by any of your apps. Be it web, smart devices, whatever. 
 
+Yes, REST/JSON could be a good fit but you are going to need a little help with wrangling all that semi-structured data. 
+
 Luckily, the bright folks in Facebook created a standard called [GraphQL](http://graphql.org/) which brings the much needed civilization to the world of web services. While REST APIs are great and I am personally a big fan of them, they suffer from a few major drawbacks which GraphQL seeks to correct: 
 
 1. Fine-grained control over what you get from the server. In a traditional REST API you might make a call like so: 
