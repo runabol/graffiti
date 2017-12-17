@@ -241,10 +241,29 @@ public class GetAllMoviesQuery implements QueryBuilder {
 }
 ```
 
-Now let's a movie through GraphQL: 
+Now let's add a movie through GraphQL: 
 
 ```
-$ curl -s -X POST -H "Content-Type:application/json" -d '{"query":"mutation { addMovie (title:\"Die Hard\") { id title } }"}' http://localhost:8080/graphql | jq .
+$ curl -s -X POST -H "Content-Type:application/json" -d '{"query":"mutation { addMovie (title:\"Titanic\") { id title } }"}' http://localhost:8080/graphql | jq .
+```
+
+Next, let's add a director:
+
+```
+mutation {
+  addDirector(name:"James Cameron"){
+    id
+    name
+  }
+}
+```
+
+Finally, let's link the movie and the director:
+
+```
+mutation {
+  addMovieDirector(movieId:"<MOVIE_ID_GOES_HERE>" directorId:"<DIRECTOR_ID_GOES_HERE>") 
+}
 ```
 
 Which should respond with something like:
@@ -266,7 +285,7 @@ Which should respond with something like:
 Now let's query for all our movies:
 
 ```
-$  curl -s -X POST -H "Content-Type:application/json" -d '{"query":"{ getAllMovies { id title } }"}' http://localhost:8080/graphql | jq .
+$  curl -s -X POST -H "Content-Type:application/json" -d '{"query":"{ getAllMovies { id title directors { name } } }"}' http://localhost:8080/graphql | jq .
 ```
 
 Which should give you back something like:
@@ -277,7 +296,12 @@ Which should give you back something like:
     "getAllMovies": [
       {
         "id": "035fec100e6c4e228237eebca84ea257",
-        "title": "Die Hard"
+        "title": "Titanic",
+        "directors": [
+           {
+              "name":"James Cameron"
+           }
+        }
       }
     ]
   },
