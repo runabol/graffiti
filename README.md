@@ -35,6 +35,8 @@ curl -s -X POST -H "Content-Type:application/json" -d '{"query":"{ getAllMovies 
 docker run --name=graphiql -p 9100:8080 -d -e GRAPHQL_SERVER=http://<YOUR_IP_GOES_HERE>:8080/graphql creactiviti/graphiql
 ```
 
+And the go to [http://localhost:9100](http://localhost:9100)
+
 # How do I use it for my own project?
 
 Check the [giraphe tutorial](https://github.com/creactiviti/giraphe#getting-started). 
