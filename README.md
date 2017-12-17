@@ -3,6 +3,69 @@
 Graffiti is a headless CMS Framework written in Java designed to be dead simple.
 
 If you are familiar with Spring Boot then you should be able to get up and running quickly by importing the project to your IDE and customize it to your needs.
+
+# Why, god why?! 
+
+Traditionally, CMS products such as Wordpress, Drupal and the like were heavily focused on the web. But today, you can't really just exist on the web. With the advent of Smart Phones, Smart TVs, Smart Watches, [Smart Toilets](https://www.cnet.com/how-to/smart-toilets-make-your-bathroom-high-tech) and the rest of them you can't rely anymore on rendering HTML for your app exprience. 
+
+What you really need is a platform-agnostic data exchange format which can be consumed by any of your apps be it web, smart devices or whatever. 
+
+Luckily, the bright folks in Facebook created a standard called [GraphQL](http://graphql.org/) which brings the much needed order to the world of web services. While REST APIs are great and I am personally a big fan of them, they suffer for a few major drawbacks which GraphQL seeks to correct: 
+
+1. Fine-grained control over what you get from the server. In a traditional REST API you might make a call like so: 
+
+```
+GET /person/1234
+```
+
+And you might get something like:
+
+```
+{
+   "firstName":"Joe",
+   "lastName":"Jones",
+   "favorites":[..],
+   "friends":[...],
+   "prefs":[...],
+   ... ---
+   ...   |  < a bunch of other data
+   ... --- 
+}
+```
+
+Then if you need to add additional piece of data to your response you just add that and hope to god that no client will decide to break because you added a new property. Moreover, some clients much want only a sliver of this response -- say just the first name of the person -- but you are giving them ALL the data whether they like it or not. Aside from the bandwidth cost, you might also have to make multiple roundrips to your database to fetch all that unnecessary data. Doesn't sound too efficient now does it? 
+
+Enter GraphQL. 
+
+You want the person's name and nothing else. No problem :
+
+```
+POST /graphql
+
+{
+   getPerson (id:"1234") {
+      firstName
+      lastName
+   }
+}
+```
+
+Which will give you back something like:
+
+```
+  {
+     "data": {
+        "getPerson": {
+           "firstName":"Joe",
+           "lastName":"Jones"
+        }
+     }
+  }
+```
+
+Now, that's a whole lot better. No extra calls to the database to fetch his `favorites`, his `friends` etc.
+
+
  
 # Weapons of Choice
 
