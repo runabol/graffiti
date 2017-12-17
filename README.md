@@ -23,7 +23,7 @@ docker run --name postgres -e POSTGRES_DB=giraphe -e POSTGRES_USER=postgres -e P
 mvn clean spring-boot:run
 ```
 
-4. Run a query:
+4. From another terminal window, run a query:
 
 ```
 curl -s -X POST -H "Content-Type:application/json" -d '{"query":"{ getAllMovies { id title directors { name } } }"}' http://localhost:8080/graphql
