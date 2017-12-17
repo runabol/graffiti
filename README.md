@@ -8,6 +8,7 @@ a sample project utilizing the [Giraphe](https://github.com/creactiviti/giraphe)
 
 ```
 git clone https://github.com/creactiviti/graffiti.git
+cd graffiti
 ```
 
 2. Run it:
