@@ -1,7 +1,9 @@
 # Graffiti
 
-Graffiti is a headless (no UI) Java CMS which is designed to be dead simple. 
+Graffiti is a headless CMS Framework written in Java designed to be dead simple.
 
+If you are familiar with Spring Boot then you should be able to get up and running quickly by importing the project to your IDE and customize it to your needs.
+ 
 # Weapons of Choice
 
 1. Java 1.8
