@@ -190,6 +190,52 @@ public class GetAllMoviesQuery implements QueryBuilder {
 }
 ```
 
+Now let's a movie through GraphQL: 
+
+```
+$ curl -s -X POST -H "Content-Type:application/json" -d '{"query":"mutation { addMovie (title:\"Die Hard\") { id title } }"}' http://localhost:8080/graphql | jq .
+```
+
+Which should respond with something like:
+
+``` 
+{
+  "data": {
+    "addMovie": {
+      "id": "035fec100e6c4e228237eebca84ea257",
+      "title": "Die Hard"
+    }
+  },
+  "errors": [],
+  "extensions": null
+}
+
+```
+
+Now let's query for all our movies:
+
+```
+$  curl -s -X POST -H "Content-Type:application/json" -d '{"query":"{ getAllMovies { id title } }"}' http://localhost:8080/graphql | jq .
+```
+
+Which should give you back something like:
+
+``` 
+{
+  "data": {
+    "getAllMovies": [
+      {
+        "id": "035fec100e6c4e228237eebca84ea257",
+        "title": "Die Hard"
+      }
+    ]
+  },
+  "errors": [],
+  "extensions": null
+}
+```
+
+
 # License
 
 Graffiti is released under version 2.0 of the Apache License.
