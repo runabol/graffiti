@@ -250,36 +250,13 @@ $ curl -s -X POST -H "Content-Type:application/json" -d '{"query":"mutation { ad
 Next, let's add a director:
 
 ```
-mutation {
-  addDirector(name:"James Cameron"){
-    id
-    name
-  }
-}
+curl -s -X POST -H "Content-Type:application/json" -d '{"query":"mutation { addDirector(name:\"James Cameron\"){ id name } }"}' http://localhost:8080/graphql | jq .
 ```
 
 Finally, let's link the movie and the director:
 
 ```
-mutation {
-  addMovieDirector(movieId:"<MOVIE_ID_GOES_HERE>" directorId:"<DIRECTOR_ID_GOES_HERE>") 
-}
-```
-
-Which should respond with something like:
-
-``` 
-{
-  "data": {
-    "addMovie": {
-      "id": "035fec100e6c4e228237eebca84ea257",
-      "title": "Die Hard"
-    }
-  },
-  "errors": [],
-  "extensions": null
-}
-
+curl -s -X POST -H "Content-Type:application/json" -d '{"query":"mutation { addMovieDirector(movieId:\"<MOVIE_ID_GOES_HERE>\" directorId:\"<DIRECTOR_ID_GOES_HERE>\") }"}' http://localhost:8080/graphql | jq .
 ```
 
 Now let's query for all our movies:
