@@ -14,6 +14,10 @@ public abstract class Fields {
     return create(aName).type(Scalars.GraphQLString);
   }
   
+  public static Builder spelField (String aName, String aExpression) {
+    return create(aName).dataFetcher(new SpelDataFetcher(aExpression));
+  }
+  
   public static Builder notNullStringField (String aName) {
     return create(aName).type(new GraphQLNonNull(Scalars.GraphQLString));
   }
