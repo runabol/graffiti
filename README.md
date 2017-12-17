@@ -23,7 +23,7 @@ It is composed of only two basic units:
 
 ### Node
 
-A Node (the round elements in the Graph above) is the basic unit of data. Another word for it could be Object or an Entity but we like Node better because this is how they like to call it in the Graph world.
+A Node (the round elements in the Graph above) is the basic unit of data. Another word for it could be Object or an Entity but Node is the standard jargon in the Graph world.
 
 Nodes are composed of key-value pairs.
 
@@ -35,7 +35,7 @@ Almost anything can be modelled as a Node: people, cars, invoices, transactions,
 
 An edge represents a link between two nodes. 
 
-Again, this could be called a Link or a Connection but we like to stick to the fancy mathematical jargon.
+Again, this could be called a Link or a Connection but we'll stick with Edge.
 
 Edges also have a type they can also have key-value pairs associated with them.
 
