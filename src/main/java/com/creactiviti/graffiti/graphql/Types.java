@@ -12,8 +12,8 @@ public abstract class Types {
     return new GraphQLInterfaceType.Builder ();
   }
   
-  public static GraphQLObjectType.Builder nodeTypeBuilder () {
-    return objectTypeBuilder().withInterface(INode.REF)
+  public static GraphQLObjectType.Builder elementTypeBuilder () {
+    return objectTypeBuilder().withInterface(IElement.REF)
                               .field(Fields.notNullStringField("id"));
   }
   

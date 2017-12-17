@@ -23,7 +23,7 @@ public class Director implements TypeBuilder {
   
   @Override
   public GraphQLType build() {
-    return Types.nodeTypeBuilder()
+    return Types.elementTypeBuilder()
                 .name(NAME)
                 .field(Fields.stringField("name"))
                 .build();

@@ -13,9 +13,9 @@ import graphql.schema.GraphQLTypeReference;
  * @since Dec 16, 2017
  */
 @Component
-public class INode implements TypeBuilder {
+public class IElement implements TypeBuilder {
   
-  public static final String NAME = "INode";
+  public static final String NAME = "IElement";
   public static final GraphQLTypeReference REF = Types.ref(NAME);
 
   @Override
