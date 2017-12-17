@@ -11,6 +11,12 @@ git clone https://github.com/creactiviti/graffiti.git
 cd graffiti
 ```
 
+2. Setup database: 
+
+```
+docker run --name postgres -e POSTGRES_DB=giraphe -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:9.6.5-alpine
+```
+
 2. Run it:
 
 ```
