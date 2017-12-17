@@ -15,7 +15,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.9.RELEASE</version>
-		<relativePath /> 
+		<relativePath />
 	</parent>
 
 	<properties>
@@ -31,13 +31,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
-		  <groupId>com.creactiviti</groupId>
-		  <artifactId>giraphe</artifactId>
-		  <version>0.0.1-SNAPSHOT</version>
+			<groupId>com.creactiviti</groupId>
+			<artifactId>giraphe</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
@@ -48,6 +48,20 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>maven-snapshots</id>
+			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 
 </project>
