@@ -27,7 +27,7 @@ public class GetAllMoviesQuery implements QueryBuilder {
                          .type(Types.list(Movie.REF))
                          .dataFetcher((env) -> {
                            return g.nodes()
-                                   .hasType(Movie.NAME);
+                                   .type(Movie.NAME);
                          }));
   }
 

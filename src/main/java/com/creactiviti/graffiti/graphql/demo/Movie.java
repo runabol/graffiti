@@ -28,13 +28,6 @@ public class Movie implements TypeBuilder {
                 .field(Fields.stringField("title"))
                 .field(Fields.spelField("directors", "${source.from('directed')}") // SPEL Expression
                              .type(Types.list(Director.REF)))
-//                .field(Fields.field("director") 
-//                             .type(Director.REF) 
-//                             .dataFetcher((env) -> {
-//                               Node movie = env.getSource();
-//                               Traversal<Node> from = movie.from("directed");
-//                               return from.hasNext()?from.next():null;
-//                             }))
                 .build();
   }
 

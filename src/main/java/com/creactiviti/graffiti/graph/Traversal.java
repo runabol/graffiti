@@ -12,7 +12,7 @@ public interface Traversal<E extends Element> extends Iterator<E>, Iterable<E> {
   
   Traversal<E> has (String aProperty, Object aValue);
   
-  Traversal<E> hasType (String aType);
+  Traversal<E> type (String aType);
   
   Traversal<E> from (String aEdgeType, String aToNodeId);
   

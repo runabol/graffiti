@@ -17,7 +17,7 @@ public class SimpleNode extends SimpleElement implements Node {
 
   @Override
   public Traversal<Node> from (String aEdgeType) {
-    return g.nodes().from(aEdgeType, id());
+    return g.nodes().from(aEdgeType ,id());
   }
   
   @Override

@@ -14,7 +14,7 @@ public class SqlNodeTraversal extends SqlGraphTraversal<Node> {
   }
 
   @Override
-  public Traversal<Node> hasType (String aType) {
+  public Traversal<Node> type (String aType) {
     where.add(new NodeTypeEq());
     arguments.add(aType);
     return this;
