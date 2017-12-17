@@ -105,6 +105,47 @@ public class SomeComponent {
 
 ```
 
-# Graffiti
+## GraphQL
+
+Now we can expose our data in a fine-grained manner using GraphQL:
+
+```
+@Component
+public class Movie implements TypeBuilder {
+  
+  public static final String NAME = "Movie";
+  public static final GraphQLTypeReference REF = Types.ref(NAME);
+
+  @Override
+  public GraphQLType build() {
+    return Types.nodeTypeBuilder()
+                .name(NAME)
+                .field(Fields.stringField("title"))
+                .build();
+  }
+
+}
+```
+
+```
+@Component
+@ConditionalOnProperty(name="graffiti.demo", havingValue="true")
+public class Director implements TypeBuilder {
+
+  public static final String NAME = "Director";
+  public static final GraphQLTypeReference REF = Types.ref(NAME);
+  
+  @Override
+  public GraphQLType build() {
+    return Types.nodeTypeBuilder()
+                .name(NAME)
+                .field(Fields.stringField("name"))
+                .build();
+  }
+
+}
+```
+
+# License
 
 Graffiti is released under version 2.0 of the Apache License.
