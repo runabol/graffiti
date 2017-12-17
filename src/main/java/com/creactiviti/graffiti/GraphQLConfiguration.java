@@ -1,7 +1,9 @@
 package com.creactiviti.graffiti;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -9,11 +11,13 @@ import org.springframework.context.annotation.Configuration;
 
 import com.creactiviti.graffiti.graphql.MutationBuilder;
 import com.creactiviti.graffiti.graphql.QueryBuilder;
+import com.creactiviti.graffiti.graphql.TypeBuilder;
 
 import graphql.GraphQL;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLObjectType.Builder;
 import graphql.schema.GraphQLSchema;
+import graphql.schema.GraphQLType;
 
 @Configuration
 public class GraphQLConfiguration {
@@ -23,6 +27,9 @@ public class GraphQLConfiguration {
   
   @Autowired(required=false)
   private List<MutationBuilder> mutationBuilders = new ArrayList<>();
+  
+  @Autowired(required=false)
+  private List<TypeBuilder> typeBuilders = new ArrayList<>();
   
   @Bean
   public GraphQL graphql () {
@@ -37,6 +44,10 @@ public class GraphQLConfiguration {
     
     mutationBuilders.forEach(mb->mb.build(mutationBuilder));
     
+    // build all types
+    
+    List<GraphQLType> types = typeBuilders.stream().map(tb->tb.build()).collect(Collectors.toList());
+    
     // build the GraphQL schema
     
     GraphQLSchema.Builder schemaBuilder = GraphQLSchema.newSchema();
@@ -49,7 +60,9 @@ public class GraphQLConfiguration {
       schemaBuilder.mutation(mutationBuilder);
     }
     
-    return GraphQL.newGraphQL(schemaBuilder.build()).build();
+    return GraphQL.newGraphQL(schemaBuilder.additionalTypes(new HashSet<>(types))
+                                           .build())
+                  .build();
   }
   
 }

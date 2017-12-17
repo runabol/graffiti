@@ -17,7 +17,7 @@ public abstract class SqlGraphTraversal<E extends Element> implements Traversal<
     graph  = aGraph;
   }
   
-  protected abstract Iterator<E> iterator ();
+  public abstract Iterator<E> iterator ();
   
   @Override
   public boolean hasNext() {

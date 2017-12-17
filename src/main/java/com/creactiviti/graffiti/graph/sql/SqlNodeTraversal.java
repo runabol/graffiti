@@ -21,7 +21,7 @@ public class SqlNodeTraversal extends SqlGraphTraversal<Node> {
   }
 
   @Override
-  protected Iterator<Node> iterator() {
+  public Iterator<Node> iterator() {
     if(iterator != null) {
       return iterator;
     }

@@ -21,7 +21,7 @@ public class SqlEdgeTraversal extends SqlGraphTraversal<Edge> {
   }
 
   @Override
-  protected Iterator<Edge> iterator() {
+  public Iterator<Edge> iterator() {
     if(iterator != null) {
       return iterator;
     }
