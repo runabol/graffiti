@@ -1,5 +1,6 @@
-package com.creactiviti.graffiti.graphql.type;
+package com.creactiviti.graffiti.graphql.demo;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import com.creactiviti.graffiti.graphql.Fields;
@@ -14,6 +15,7 @@ import graphql.schema.GraphQLTypeReference;
  * @since Dec 16, 2017
  */
 @Component
+@ConditionalOnProperty(name="graffiti.demo", havingValue="true")
 public class Director implements TypeBuilder {
 
   public static final String NAME = "Director";
