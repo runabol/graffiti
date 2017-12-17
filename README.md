@@ -8,9 +8,9 @@ If you are familiar with Spring Boot then you should be able to get up and runni
 
 Traditionally, CMS products such as Wordpress, Drupal and the like were heavily focused on the web. But today, you can't really just exist on the web. With the advent of Smart Phones, Smart TVs, Smart Watches, [Smart Toilets](https://www.cnet.com/how-to/smart-toilets-make-your-bathroom-high-tech) and the rest of them you can't rely anymore on rendering HTML for your app exprience. 
 
-What you really need is a platform-agnostic data exchange format which can be consumed by any of your apps be it web, smart devices or whatever. 
+What you really need is a platform-agnostic data exchange format which can be consumed by any of your apps. Be it web, smart devices, whatever. 
 
-Luckily, the bright folks in Facebook created a standard called [GraphQL](http://graphql.org/) which brings the much needed order to the world of web services. While REST APIs are great and I am personally a big fan of them, they suffer for a few major drawbacks which GraphQL seeks to correct: 
+Luckily, the bright folks in Facebook created a standard called [GraphQL](http://graphql.org/) which brings the much needed civilization to the world of web services. While REST APIs are great and I am personally a big fan of them, they suffer from a few major drawbacks which GraphQL seeks to correct: 
 
 1. Fine-grained control over what you get from the server. In a traditional REST API you might make a call like so: 
 
@@ -65,7 +65,23 @@ Which will give you back something like:
 
 Now, that's a whole lot better. No extra calls to the database to fetch his `favorites`, his `friends` etc.
 
+2. Versioning
 
+In REST world, when you need to add new properties to your response you can either take the chance of adding them and hoping nothing breaks or you can add `/v2/person/:id` endpoint and add your properties there. The problem is that now you have two endpoints which are semantically very similar -- one being a superset of the other. In GraphQL, since clients are *explicitly* asking for what they want back from the server they are not going to break when you add any new properties.
+
+3. Schema
+
+Because the shape of a GraphQL query closely matches the result, you can predict what the query will return without knowing that much about the server. But it's useful to have an exact description of the data we can ask for - what fields can we select? What kinds of objects might they return? What fields are available on those sub-objects? That's where the schema comes in.
+
+Every GraphQL service defines a set of types which completely describe the set of possible data you can query on that service. Then, when queries come in, they are validated and executed against that schema.
+
+4. Documentation
+
+A nice outcome of having to define your schema is that you sort of get the documentation of your API for free. Client developers can now interrogate your API and find what you have available without you having to explicitly write seperate API docs.
+
+5. Tooling 
+
+Another nice outcome of having a schema is having tooling that lets you visualize your API and interact with it in real-time. One such tool is [GraphiQL](https://github.com/graphql/graphiql) which supports auto-completion and other nifty features.
  
 # Weapons of Choice
 
