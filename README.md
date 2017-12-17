@@ -120,9 +120,11 @@ public class Movie implements TypeBuilder {
 
   @Override
   public GraphQLType build() {
-    return Types.nodeTypeBuilder()
+    return Types.elementTypeBuilder()
                 .name(NAME)
                 .field(Fields.stringField("title"))
+                .field(Fields.spelField("directors", "${source.from('directed')}") // SPEL Expression
+                             .type(Types.list(Director.REF)))
                 .build();
   }
 
@@ -170,6 +172,55 @@ public class AddMovieMutation implements MutationBuilder {
 }
 ```
 
+```
+@Component
+public class AddDirectorMutation implements MutationBuilder {
+  
+  @Autowired private Graph g;
+
+  @Override
+  public void build (Builder aBuilder) {
+    aBuilder.field(Fields.field("addDirector")
+                         .type(Director.REF)
+                         .argument(Arguments.notNullStringArgument("name"))
+                         .dataFetcher((env) -> {
+                           Node node = SimpleNode.builder(g) 
+                                                 .type(Director.NAME)
+                                                 .properties(env.getArguments())
+                                                 .build();
+                           return g.add(node);
+                         }));
+  }
+
+}
+```
+
+```
+@Component
+public class AddMovieDirectorMutation implements MutationBuilder {
+  
+  @Autowired private Graph g;
+
+  @Override
+  public void build (Builder aBuilder) {
+    aBuilder.field(Fields.field("addMovieDirector")
+                         .type(Scalars.GraphQLString)
+                         .argument(Arguments.notNullStringArgument("movieId"))
+                         .argument(Arguments.notNullStringArgument("directorId"))
+                         .dataFetcher((env) -> {
+                           Edge edge = SimpleEdge.builder(g) 
+                                                 .type("directed")
+                                                 .fromNodeId(env.getArgument("directorId"))
+                                                 .toNodeId(env.getArgument("movieId"))
+                                                 .build();
+                           g.add(edge);
+                           
+                           return "OK";
+                         }));
+  }
+
+}
+```
 
 ```
 @Component
