@@ -17,19 +17,19 @@ cd graffiti
 docker run --name postgres -e POSTGRES_DB=giraphe -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=password -d -p 5432:5432 postgres:9.6.5-alpine
 ```
 
-2. Run it:
+3. Run it:
 
 ```
 mvn clean spring-boot:run
 ```
 
-3. Run a query:
+4. Run a query:
 
 ```
 curl -s -X POST -H "Content-Type:application/json" -d '{"query":"{ getAllMovies { id title directors { name } } }"}' http://localhost:8080/graphql
 ```
 
-4. Optional: Interact with the API through GraphiQL:
+5. Optional: Interact with the API through GraphiQL:
 
 ```
 docker run --name=graphiql -p 9100:8080 -d -e GRAPHQL_SERVER=http://<YOUR_IP_GOES_HERE>:8080/graphql creactiviti/graphiql
