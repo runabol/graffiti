@@ -235,6 +235,15 @@ Which should give you back something like:
 }
 ```
 
+## GraphiQL
+
+If you want to interact with the GraphQL server using a visual query builder try:
+
+```
+docker run --name=graphiql -p 9100:8080 -d -e GRAPHQL_SERVER=http://<YOUR_IP_GOES_HERE>:8080/graphql creactiviti/graphiql
+```
+
+And the go to [http://localhost:9100](http://localhost:9100)
 
 # License
 
