@@ -6,7 +6,7 @@ If you are familiar with Spring Boot then you should be able to get up and runni
 
 # Why, god why?! 
 
-Traditionally, CMS products such as Wordpress, Drupal and the like were heavily focused on the web. But today, you can't really just exist on the web. With the advent of Smart Phones, Smart TVs, Smart Watches, [Smart Toilets](https://www.cnet.com/how-to/smart-toilets-make-your-bathroom-high-tech) and the rest of them you can't rely anymore on rendering HTML for your app exprience. 
+Traditionally, CMS products such as Wordpress, Drupal and the like were heavily focused on the web. They were eseentially an HTML rendering engine. But today, you can't really just exist on the web. With the advent of Smart Phones, Smart TVs, Smart Watches, [Smart Toilets](https://www.cnet.com/how-to/smart-toilets-make-your-bathroom-high-tech) and the rest of them you can't rely anymore on rendering HTML for your app exprience. 
 
 What you really need is a platform-agnostic data exchange format which can be consumed by any of your apps. Be it web, smart devices, whatever. 
 
