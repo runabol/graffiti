@@ -109,6 +109,8 @@ public class SomeComponent {
 
 Now we can expose our data in a fine-grained manner using GraphQL:
 
+1. Define the GraphQL Schema:
+
 ```
 @Component
 public class Movie implements TypeBuilder {
@@ -129,7 +131,6 @@ public class Movie implements TypeBuilder {
 
 ```
 @Component
-@ConditionalOnProperty(name="graffiti.demo", havingValue="true")
 public class Director implements TypeBuilder {
 
   public static final String NAME = "Director";
@@ -141,6 +142,49 @@ public class Director implements TypeBuilder {
                 .name(NAME)
                 .field(Fields.stringField("name"))
                 .build();
+  }
+
+}
+```
+
+```
+@Component
+public class AddMovieMutation implements MutationBuilder {
+  
+  @Autowired private Graph g;
+
+  @Override
+  public void build (Builder aBuilder) {
+    aBuilder.field(Fields.field("addMovie")
+                         .type(Movie.REF)
+                         .argument(Arguments.notNullStringArgument("title"))
+                         .dataFetcher((env) -> {
+                           Node node = SimpleNode.builder(g) 
+                                                 .type(Movie.NAME)
+                                                 .properties(env.getArguments())
+                                                 .build();
+                           return g.add(node);
+                         }));
+  }
+
+}
+```
+
+
+```
+@Component
+public class GetAllMoviesQuery implements QueryBuilder {
+
+  @Autowired private Graph g;
+  
+  @Override
+  public void build(Builder aBuilder) {
+    aBuilder.field(Fields.field("getAllMovies")
+                         .type(Types.list(Movie.REF))
+                         .dataFetcher((env) -> {
+                           return g.nodes()
+                                   .hasType(Movie.NAME);
+                         }));
   }
 
 }
