@@ -1,15 +1,14 @@
 package com.creactiviti.graffiti.graphql.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.creactiviti.graffiti.graph.Edge;
-import com.creactiviti.graffiti.graph.Graph;
-import com.creactiviti.graffiti.graph.SimpleEdge;
-import com.creactiviti.graffiti.graphql.Arguments;
-import com.creactiviti.graffiti.graphql.Fields;
-import com.creactiviti.graffiti.graphql.MutationBuilder;
+import com.creactiviti.giraphe.graph.Edge;
+import com.creactiviti.giraphe.graph.Graph;
+import com.creactiviti.giraphe.graph.SimpleEdge;
+import com.creactiviti.giraphe.graphql.Arguments;
+import com.creactiviti.giraphe.graphql.Fields;
+import com.creactiviti.giraphe.graphql.MutationBuilder;
 
 import graphql.Scalars;
 import graphql.schema.GraphQLObjectType.Builder;
@@ -19,7 +18,6 @@ import graphql.schema.GraphQLObjectType.Builder;
  * @since Dec 16, 2017
  */
 @Component
-@ConditionalOnProperty(name="graffiti.demo", havingValue="true")
 public class AddMovieDirectorMutation implements MutationBuilder {
   
   @Autowired private Graph g;

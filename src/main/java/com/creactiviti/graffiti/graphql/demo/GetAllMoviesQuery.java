@@ -1,13 +1,12 @@
 package com.creactiviti.graffiti.graphql.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.creactiviti.graffiti.graph.Graph;
-import com.creactiviti.graffiti.graphql.Fields;
-import com.creactiviti.graffiti.graphql.QueryBuilder;
-import com.creactiviti.graffiti.graphql.Types;
+import com.creactiviti.giraphe.graph.Graph;
+import com.creactiviti.giraphe.graphql.Fields;
+import com.creactiviti.giraphe.graphql.QueryBuilder;
+import com.creactiviti.giraphe.graphql.Types;
 
 import graphql.schema.GraphQLObjectType.Builder;
 
@@ -16,7 +15,6 @@ import graphql.schema.GraphQLObjectType.Builder;
  * @since Dec 16, 2017
  */
 @Component
-@ConditionalOnProperty(name="graffiti.demo", havingValue="true")
 public class GetAllMoviesQuery implements QueryBuilder {
 
   @Autowired private Graph g;
