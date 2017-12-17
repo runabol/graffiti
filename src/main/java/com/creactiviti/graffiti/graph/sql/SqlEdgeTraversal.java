@@ -1,5 +1,6 @@
 package com.creactiviti.graffiti.graph.sql;
 
+import java.nio.channels.UnsupportedAddressTypeException;
 import java.util.Iterator;
 
 import com.creactiviti.graffiti.graph.Edge;
@@ -29,17 +30,13 @@ public class SqlEdgeTraversal extends SqlGraphTraversal<Edge> {
   }
 
   @Override
-  public Traversal<Edge> fromNodeId(String aFromNodeId) {
-    where.add(new FromNodeIdEq());
-    arguments.add(aFromNodeId);
-    return this;
+  public Traversal<Edge> from(String aEdgeType, String aToNodeId) {
+    throw new UnsupportedAddressTypeException();
   }
-
+  
   @Override
-  public Traversal<Edge> toNodeId(String aToNodeId) {
-    where.add(new ToNodeIdEq());
-    arguments.add(aToNodeId);
-    return this;
+  public Traversal<Edge> to(String aEdgeType, String aFromNodeId) {
+    throw new UnsupportedAddressTypeException();
   }
-
+  
 }

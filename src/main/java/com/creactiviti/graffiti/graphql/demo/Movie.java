@@ -3,7 +3,6 @@ package com.creactiviti.graffiti.graphql.demo;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
-import com.creactiviti.graffiti.graph.Edge;
 import com.creactiviti.graffiti.graph.Node;
 import com.creactiviti.graffiti.graph.Traversal;
 import com.creactiviti.graffiti.graphql.Fields;
@@ -29,12 +28,12 @@ public class Movie implements TypeBuilder {
     return Types.elementTypeBuilder()
                 .name(NAME)
                 .field(Fields.stringField("title"))
-                .field(Fields.field("director")
-                             .type(Director.REF)
+                .field(Fields.field("director") 
+                             .type(Director.REF) 
                              .dataFetcher((env) -> {
                                Node movie = env.getSource();
-                               Traversal<Edge> from = movie.from("directed");
-                               return from.hasNext()?from.next().from():null;
+                               Traversal<Node> from = movie.from("directed");
+                               return from.hasNext()?from.next():null;
                              }))
                 .build();
   }

@@ -27,15 +27,25 @@ public class SqlNodeTraversal extends SqlGraphTraversal<Node> {
     }
     return (iterator = graph.nodes(where, arguments));
   }
-
+  
   @Override
-  public Traversal<Node> fromNodeId(String aFromNodeId) {
-    throw new UnsupportedOperationException();
+  public Traversal<Node> from(String aEdgeType, String aToNodeId) {
+    where.add((sb) -> {
+      sb.where(" node.id in ( select e.from_node_id from edge e where e.edge_type = ? and e.to_node_id = ?) ");
+    });
+    arguments.add(aEdgeType);
+    arguments.add(aToNodeId);
+    return this;
   }
-
+  
   @Override
-  public Traversal<Node> toNodeId(String aFromNodeId) {
-    throw new UnsupportedOperationException();
+  public Traversal<Node> to(String aEdgeType, String aFromNodeId) {
+    where.add((sb) -> {
+      sb.where(" node.id in ( select e.to_node_id from edge e where e.edge_type = ? and e.from_node_id = ?) ");
+    });
+    arguments.add(aEdgeType);
+    arguments.add(aFromNodeId);
+    return this;
   }
 
 }

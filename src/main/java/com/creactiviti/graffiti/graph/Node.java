@@ -6,8 +6,8 @@ package com.creactiviti.graffiti.graph;
  */
 public interface Node extends Element {
 
-  Traversal<Edge> from (String aEdgeType);
+  Traversal<Node> from (String aEdgeType);
   
-  Traversal<Edge> to (String aEdgeType);
+  Traversal<Node> to (String aEdgeType);
   
 }

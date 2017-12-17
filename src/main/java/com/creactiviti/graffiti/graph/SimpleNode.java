@@ -16,13 +16,13 @@ public class SimpleNode extends SimpleElement implements Node {
   }
 
   @Override
-  public Traversal<Edge> from (String aEdgeType) {
-    return g.edges().toNodeId(id()).hasType(aEdgeType);
+  public Traversal<Node> from (String aEdgeType) {
+    return g.nodes().from(aEdgeType, id());
   }
   
   @Override
-  public Traversal<Edge> to (String aEdgeType) {
-    return g.edges().fromNodeId(id()).hasType(aEdgeType);
+  public Traversal<Node> to (String aEdgeType) {
+    return g.nodes().to(aEdgeType, id());
   }
   
   public static Builder builder (Graph aGraph) {
